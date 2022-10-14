@@ -13,12 +13,24 @@ contract supplyChainManagement{
         address customer;
         status _status;
     }   
+
     order[] ordrers;
 
+    modifier onlyOrderDeliveringCompany(uint){
+        require(ordrers[_index].deliveryCompany == msg.sender);
+        _;
+    }
     function createOrder(string memory _title, string memory _description, address _deliveryCompany, address _customer) public returns(uint){
         order memory _order = order(_title,_description,msg.sender,_deliveryCompany, _customer, status.created);
         uint index = ordrers.length - 1;
         ordrers[index] = _order;
         return index;
     }
+
+
+    function startDeliveringOrder(uint _index)public onlyOrderDeliveringCompany(_index) {
+        order storage _order = ordrers[_index];
+        _order._status = status.delivering;
+    }
+
 }
