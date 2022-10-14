@@ -16,7 +16,7 @@ contract supplyChainManagement{
 
     order[] ordrers;
 
-    modifier onlyOrderDeliveringCompany(uint){
+    modifier onlyOrderDeliveringCompany(uint _index){
         require(ordrers[_index].deliveryCompany == msg.sender);
         _;
     }
