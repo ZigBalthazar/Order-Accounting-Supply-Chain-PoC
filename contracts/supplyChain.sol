@@ -33,4 +33,9 @@ contract supplyChainManagement{
         _order._status = status.delivering;
     }
 
+    function stopDeliveringOrder(uint _index) public onlyOrderDeliveringCompany(_index){
+        order storage _order = ordrers[_index];
+        _order._status = status.deliverd;
+    }
+
 }
