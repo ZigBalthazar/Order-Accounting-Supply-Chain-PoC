@@ -64,4 +64,8 @@ contract supplyChainManagement{
         ordrers[_index]._status = status.accepted;
     } 
 
+    function declineOrder(uint _index) public onlyCustomer(_index) orderDelivered(_index) {
+        ordrers[_index]._status = status.declined;
+    }
+
 }
